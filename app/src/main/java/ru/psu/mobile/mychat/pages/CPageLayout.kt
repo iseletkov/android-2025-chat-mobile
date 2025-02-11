@@ -19,6 +19,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ru.psu.mobile.mychat.PageInfo
+import ru.psu.mobile.mychat.pages.pagecheckpoint.CPageCheckPoint
+import ru.psu.mobile.mychat.pages.pageroute.CPageRoute
 import ru.psu.mobile.mychat.ui.theme.cpurple
 import ru.psu.mobile.mychat.util.CBottomNavigationBar
 
@@ -40,21 +42,26 @@ fun CPageLayout()
                     Text("Калькулятор")
                 },
                 navigationIcon = {
-                    IconButton(
-                        onClick = {},
-                        colors = IconButtonDefaults.iconButtonColors(
-                            contentColor = Color.White
-                        ),
-                    ) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            "back"
-                        )
+                    //Не работает, т.к. не вызывает перерисовку при навигации.
+                    val currentRoute = navController.currentBackStackEntry?.destination?.route?:""
+                    if (currentRoute.indexOf("checkpointinfo")==0) {
+                        IconButton(
+                            onClick = {},
+                            colors = IconButtonDefaults.iconButtonColors(
+                                contentColor = Color.White
+                            ),
+                        ) {
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                "back"
+                            )
+                        }
                     }
+
+
                 },
             )
         },
-
         bottomBar = {
             CBottomNavigationBar(navController = navController)
         }
@@ -64,9 +71,14 @@ fun CPageLayout()
         //https://www.geeksforgeeks.org/bottom-navigation-bar-in-android-jetpack-compose/
         NavHost(
             navController,
-            startDestination = "calculator",
+            startDestination = "route",
             modifier = modifier
         ) {
+            composable("route") { CPageRoute(navController) }
+            composable("checkpointinfo/{id}") { navBackStackEntry ->
+                val id = navBackStackEntry.arguments?.getString("id")?:""
+                CPageCheckPoint(id)
+            }
             composable("calculator") { CPageCalculator(navController) }
             composable("chat/{text}") { navBackStackEntry ->
                 val text = navBackStackEntry.arguments?.getString("text")?:""

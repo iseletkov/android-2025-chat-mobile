@@ -69,6 +69,11 @@ fun CBottomNavigationBar(navController: NavHostController) {
 object NavBarItems {
     val BarItems = listOf(
         CBarItem(
+            title = "Route",
+            image = R.drawable.baseline_route_24,
+            route = "route"
+        ),
+        CBarItem(
             title = "Calculator",
             image = R.drawable.baseline_calculate_24,
             route = "calculator"
