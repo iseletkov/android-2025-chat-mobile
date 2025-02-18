@@ -21,8 +21,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -36,7 +36,7 @@ fun CPageRoute(
 {
     val viewModel                           : CViewModelPageRoute
                                             = viewModel()
-
+    val checkPoints by viewModel.checkpoints.collectAsState()
     Box(
         modifier = Modifier.fillMaxSize().padding(20.dp),
     ){
@@ -44,7 +44,7 @@ fun CPageRoute(
             //modifier = Modifier.padding(innerPadding)
         ) {
             items(
-                viewModel.checkpoints,
+                checkPoints,
                 key = { checkpoint -> checkpoint.id }
             ) { checkpoint ->
                 CheckPointRow(
