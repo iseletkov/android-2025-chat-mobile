@@ -84,9 +84,9 @@ object NavBarItems {
             route = "chat/123"
         ),
         CBarItem(
-            title = "Info",
-            image = R.drawable.baseline_info_24,
-            route = "info/gggg"
+            title = "Settings",
+            image = R.drawable.baseline_settings_24,
+            route = "settings"
         )
     )
 }

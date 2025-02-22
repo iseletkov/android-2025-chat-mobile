@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">mychat</string>
+    <string name="username">User name</string>
+    <string name="sendReportAutomatically">Send report automatically</string>
+    <string name="Route">Route</string>
+    <string name="Calculator">Calculator</string>
+    <string name="Settings">Settings</string>
 </resources>

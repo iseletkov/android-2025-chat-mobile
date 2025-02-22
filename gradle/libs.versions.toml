@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.3"
+datastorePreferences = "1.1.2"
 kotlin = "2.0.21"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -11,9 +12,12 @@ composeBom = "2025.02.00"
 nav_version = "2.8.7"
 room_version = "2.6.1"
 ksp_version = "2.0.21-1.0.27"
+datastoreCoreAndroid = "1.1.2"
+datastoreCoreJvm = "1.1.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -32,6 +36,8 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime",version.ref = "room_version"}
 androidx-room-compiler = {group = "androidx.room", name = "room-compiler", version.ref = "room_version"}
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room_version"}
+androidx-datastore-core-android = { group = "androidx.datastore", name = "datastore-core-android", version.ref = "datastoreCoreAndroid" }
+androidx-datastore-core-jvm = { group = "androidx.datastore", name = "datastore-core-jvm", version.ref = "datastoreCoreJvm" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
