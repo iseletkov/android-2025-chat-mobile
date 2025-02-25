@@ -40,6 +40,7 @@ fun CPageRoute(
     modifier                                : Modifier = Modifier
 )
 {
+    //Изменение заголовка страницы
     val viewModelLayout                     : CViewModelLayout
                                             = viewModel(LocalActivity.current as ComponentActivity)
     viewModelLayout.setPageName(stringResource(R.string.Route))
@@ -47,7 +48,7 @@ fun CPageRoute(
 
     val viewModel                           : CViewModelPageRoute
                                             = viewModel()
-    val checkPoints by viewModel.checkpoints.collectAsState()
+    val checkPointsWithRelations by viewModel.checkpoints.collectAsState()
     Box(
         modifier = Modifier.fillMaxSize().padding(20.dp),
     ){
@@ -55,11 +56,11 @@ fun CPageRoute(
             //modifier = Modifier.padding(innerPadding)
         ) {
             items(
-                checkPoints,
-                key = { checkpoint -> checkpoint.id }
-            ) { checkpoint ->
+                checkPointsWithRelations,
+                key = { checkPointWithRelations -> checkPointWithRelations.checkpoint.id!! }
+            ) { checkPointWithRelations ->
                 CheckPointRow(
-                    checkpoint,
+                    checkPointWithRelations.checkpoint,
                     onClick = {checkpoint1 ->
                         navController.navigate("checkpointinfo/${checkpoint1.id}")
                     },

@@ -10,7 +10,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
@@ -28,10 +27,8 @@ class CViewModelPageSettings(
     var username                            = _username.asStateFlow()
 
     private val sendReportAutomaticallyKey  = booleanPreferencesKey("saveReportAutomatically")
-    private val _sendReportAutomatically    : MutableStateFlow<Boolean>
-                                            = MutableStateFlow(true)
-    val sendReportAutomatically             : StateFlow<Boolean>
-                                            = _sendReportAutomatically.asStateFlow()
+    private val _sendReportAutomatically    = MutableStateFlow(true)
+    val sendReportAutomatically             = _sendReportAutomatically.asStateFlow()
 
     init{
         viewModelScope.launch {

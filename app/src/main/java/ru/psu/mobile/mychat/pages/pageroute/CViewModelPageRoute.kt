@@ -10,113 +10,47 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.psu.mobile.mychat.model.CCheckPoint
+import ru.psu.mobile.mychat.model.CCheckPointWithRelations
+import ru.psu.mobile.mychat.model.CPhoto
 import ru.psu.mobile.mychat.repositories.CRepositoryCheckPoints
+import java.util.UUID
 
 class CViewModelPageRoute(application: Application) :  AndroidViewModel(application)
 {
     private val repositoryCheckPoints = CRepositoryCheckPoints(application)
 
-    val checkpoints: StateFlow<List<CCheckPoint>> = repositoryCheckPoints.getAll()
+    val checkpoints: StateFlow<List<CCheckPointWithRelations>> = repositoryCheckPoints.getAllWithRelations()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     //Это кусок кода для вставки тестовых элементов в БД.
 //    init {
-//        kotlinx.coroutines.MainScope().launch(Dispatchers.IO) {
+//        MainScope().launch(Dispatchers.IO) {
 //
 //
 //            repositoryCheckPoints.insert(
 //                CCheckPoint(
-//                    UUID.randomUUID(),
+//                    UUID.fromString("6d37dad0-6bb3-4548-80c1-e8e7be9f7a82"),
 //                    "Контрольная точка 1",
 //                    "флвьфджлв",
 //                    "adadadadadawd"
 //                )
 //            )
 //
-//            repositoryCheckPoints.insert(
-//                CCheckPoint(
-//                    UUID.randomUUID(),
-//                    "Контрольная точка 2",
-//                    "adawda",
-//                    "adadadad adawd a;ld ;almf;aknwf; adawd"
+//
+//
+//            repositoryCheckPoints.savePhoto(
+//                CPhoto(
+//                    UUID.fromString("6d37dad0-6bb2-4548-80c1-e8e7be9f7a82"),
+//                    "dog.png",
+//                    UUID.fromString("6d37dad0-6bb3-4548-80c1-e8e7be9f7a82"),
+//                    null
 //                )
 //            )
+//
+//
 //        }
 //    }
 
-
-//    private val _checkpoints = mutableStateListOf<CCheckPoint>(
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 1",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        ),
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 2",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        ),
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 3",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        ),
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 4",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        ), CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 5",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        ),
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 6",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        ),
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 7",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        ),
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 8",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        ),
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 9",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        )
-//        ,
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 10",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        )
-//        ,
-//        CCheckPoint(
-//            UUID.randomUUID(),
-//            "Контрольная точка 11",
-//            "флвьфджлв",
-//            "adadadadadawd"
-//        )
-//    )
-
-//    val checkpoints: List<CCheckPoint>
-//        get() = _checkpoints
 
     fun addCheckPoint(
         checkpoint : CCheckPoint

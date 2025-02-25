@@ -5,13 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import ru.psu.mobile.mychat.database.dao.CDAOCheckPoints
+import ru.psu.mobile.mychat.database.dao.CDAOPhotos
 import ru.psu.mobile.mychat.model.CCheckPoint
+import ru.psu.mobile.mychat.model.CPhoto
 
 
-@Database(entities = [CCheckPoint::class], version = 1)
+@Database(entities = [
+    CCheckPoint::class,
+    CPhoto::class], version = 1)
 abstract class CDatabase : RoomDatabase() {
     abstract fun daoCheckPoints(): CDAOCheckPoints
-
+    abstract fun daoPhotos(): CDAOPhotos
     companion object {
         @Volatile
         private var INSTANCE: CDatabase? = null

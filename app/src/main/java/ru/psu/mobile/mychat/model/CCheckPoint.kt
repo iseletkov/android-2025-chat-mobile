@@ -11,9 +11,11 @@ data class CCheckPoint (
     @PrimaryKey
     var id : UUID,
     @ColumnInfo
-    var name : String,
+    var name : String = "",
     @ColumnInfo
-    var lat : String,
+    var lat : String = "",
     @ColumnInfo
-    var lon : String
+    var lon : String = "",
+
+//    var photos : List<CPhoto>
 )

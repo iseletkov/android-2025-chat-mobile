@@ -186,7 +186,7 @@ fun CalculatorMenu(
             .background(Color.Yellow)
             .align(alignment = Alignment.CenterHorizontally)
         Image(
-            painter = painterResource(id = R.mipmap.dog),
+            painter = painterResource(id = R.mipmap.dog1),
             contentDescription = "Это собака",
             contentScale = ContentScale.Fit,
             modifier = imageModifier,
