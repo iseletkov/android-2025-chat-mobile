@@ -28,6 +28,7 @@ class CViewModelPageCheckPoint(
     private val repositoryCheckPoints = CRepositoryCheckPoints(context)
 
     private val checkpointIdFlow = MutableStateFlow<UUID?>(null)
+
     fun setId(
         id : UUID
     ) {
@@ -67,7 +68,5 @@ class CViewModelPageCheckPoint(
                 )
             )
         }
-
     }
-
 }

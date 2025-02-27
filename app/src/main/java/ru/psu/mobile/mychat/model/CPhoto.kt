@@ -9,10 +9,11 @@ import androidx.room.PrimaryKey
 import java.util.UUID
 
 @Entity(
+    tableName = "photos",
     foreignKeys = [ForeignKey(
         entity = CCheckPoint::class,
         parentColumns = ["id"],
-        childColumns = ["checkpoint"],
+        childColumns = ["checkpoint_id"],
         onDelete = ForeignKey.CASCADE
     )]
 )
@@ -24,7 +25,7 @@ data class CPhoto
     @ColumnInfo
     var name: String,
 
-    @ColumnInfo//(name="checkpoint_id")
+    @ColumnInfo(name="checkpoint_id")
     var checkpoint : UUID,
 
     @Ignore

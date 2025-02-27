@@ -8,7 +8,7 @@ data class CCheckPointWithRelations(
     val checkpoint: CCheckPoint,
     @Relation(
         parentColumn = "id",
-        entityColumn = "checkpoint"
+        entityColumn = "checkpoint_id"
     )
     val photos: List<CPhoto>
 

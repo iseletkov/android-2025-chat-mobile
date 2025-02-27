@@ -60,11 +60,9 @@ class CViewModelPageRoute(application: Application) :  AndroidViewModel(applicat
 
 
         //Здесь запрос в БД
-
-        kotlinx.coroutines.MainScope().launch(Dispatchers.IO) {
+        MainScope().launch(Dispatchers.IO) {
             repositoryCheckPoints.insert(checkpoint)
         }
-        //_checkpoints.add(checkPoint)
     }
 
     fun remove(
@@ -75,8 +73,6 @@ class CViewModelPageRoute(application: Application) :  AndroidViewModel(applicat
         MainScope().launch(Dispatchers.IO) {
             repositoryCheckPoints.delete(checkpoint)
         }
-
-        //_checkpoints.remove(checkpoint)
     }
 
 }

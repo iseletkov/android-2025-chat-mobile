@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 val Context.dataStore by preferencesDataStore(name = "settings")
 
 class CViewModelPageSettings(
-    val context                             : Application
+    private val context                     : Application
 )                                           : AndroidViewModel(context)
 {
     private val usernameKey                 = stringPreferencesKey("username")

@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onEach
 import ru.psu.mobile.mychat.database.CDatabase
 import ru.psu.mobile.mychat.model.CCheckPoint
@@ -65,6 +67,7 @@ class CRepositoryCheckPoints(
     ) : Flow<CCheckPointWithRelations>
     {
         return daoCheckPoints.getByIdWithRelation(id)
+            .filterNotNull()
             .onEach { checkpointWithRelations ->
                 readPhotos(checkpointWithRelations)
             }
@@ -81,6 +84,17 @@ class CRepositoryCheckPoints(
         checkPoint: CCheckPoint
     )
     {
+        //Записи о фотографиях из БД удаляться каскадом при удалении контрольной точки.
+        //А сами файлы надо удалить вручную, перед удалением из БД.
+
+        val checkpointWithRelations = getByIdWithRelations(checkPoint.id).firstOrNull()
+        checkpointWithRelations ?: return
+
+        checkpointWithRelations.photos.forEach { photo ->
+            val file = File("${filesDir}/${photo.id}.jpg")
+            file.delete()
+        }
+
         daoCheckPoints.delete(checkPoint)
     }
 
@@ -88,8 +102,6 @@ class CRepositoryCheckPoints(
         photo: CPhoto
     )
     {
-
-
         photo.bitmap?.let{ bitmap ->
             FileOutputStream(File("${filesDir}/${photo.id}.jpg")).use{ outputStream->
                 outputStream.write(bitmap.toByteArray())

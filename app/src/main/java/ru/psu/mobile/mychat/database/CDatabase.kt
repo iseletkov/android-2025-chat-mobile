@@ -11,8 +11,11 @@ import ru.psu.mobile.mychat.model.CPhoto
 
 
 @Database(entities = [
-    CCheckPoint::class,
-    CPhoto::class], version = 1)
+        CCheckPoint::class,
+        CPhoto::class
+    ],
+    version = 1
+)
 abstract class CDatabase : RoomDatabase() {
     abstract fun daoCheckPoints(): CDAOCheckPoints
     abstract fun daoPhotos(): CDAOPhotos
