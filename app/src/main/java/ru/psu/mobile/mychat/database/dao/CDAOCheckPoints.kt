@@ -31,6 +31,9 @@ interface CDAOCheckPoints {
     @Insert(onConflict = REPLACE)
     fun insert(checkPoint : CCheckPoint)
 
+    @Insert(onConflict = REPLACE)
+    fun insertAll(checkpoints: List<CCheckPoint>)
+
     @Update
     suspend fun update(checkPoint : CCheckPoint)
     @Delete

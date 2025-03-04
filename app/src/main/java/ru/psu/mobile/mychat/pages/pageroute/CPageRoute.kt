@@ -121,12 +121,12 @@ fun CheckPointRow(
                 .weight(1f)
         )
         Text(
-            text = checkPoint.lat,
+            text = checkPoint.lat ?: "",
             modifier = Modifier
                 .width(60.dp)
         )
         Text(
-            text = checkPoint.lon,
+            text = checkPoint.lon ?: "",
             modifier = Modifier
                 .width(60.dp)
         )

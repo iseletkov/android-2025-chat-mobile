@@ -3,14 +3,18 @@ package ru.psu.mobile.mychat.repositories
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import ru.psu.mobile.mychat.database.CDatabase
 import ru.psu.mobile.mychat.model.CCheckPoint
 import ru.psu.mobile.mychat.model.CCheckPointWithRelations
 import ru.psu.mobile.mychat.model.CPhoto
+import ru.psu.mobile.mychat.util.retrofit.CAPICheckPoints
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
@@ -80,6 +84,12 @@ class CRepositoryCheckPoints(
         daoCheckPoints.insert(checkPoint)
     }
 
+    suspend fun insertAll(
+        checkPoints: List<CCheckPoint>
+    )
+    {
+        daoCheckPoints.insertAll(checkPoints)
+    }
     suspend fun delete(
         checkPoint: CCheckPoint
     )
@@ -109,6 +119,14 @@ class CRepositoryCheckPoints(
 
             daoPhotos.insert(photo)
         }
+    }
+
+    suspend fun updateCheckPointsFromServer()
+    {
+        //Запрос данных на сервере
+        val listcheckpoints = CAPICheckPoints.retrofitService.getCheckPoints()
+        //Сохранение данных в локальную БД.
+        insertAll(listcheckpoints)
     }
 }
 

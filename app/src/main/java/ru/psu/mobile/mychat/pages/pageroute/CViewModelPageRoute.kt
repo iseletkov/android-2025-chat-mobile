@@ -11,9 +11,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.psu.mobile.mychat.model.CCheckPoint
 import ru.psu.mobile.mychat.model.CCheckPointWithRelations
-import ru.psu.mobile.mychat.model.CPhoto
 import ru.psu.mobile.mychat.repositories.CRepositoryCheckPoints
-import java.util.UUID
 
 class CViewModelPageRoute(application: Application) :  AndroidViewModel(application)
 {
@@ -23,33 +21,13 @@ class CViewModelPageRoute(application: Application) :  AndroidViewModel(applicat
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     //Это кусок кода для вставки тестовых элементов в БД.
-//    init {
-//        MainScope().launch(Dispatchers.IO) {
-//
-//
-//            repositoryCheckPoints.insert(
-//                CCheckPoint(
-//                    UUID.fromString("6d37dad0-6bb3-4548-80c1-e8e7be9f7a82"),
-//                    "Контрольная точка 1",
-//                    "флвьфджлв",
-//                    "adadadadadawd"
-//                )
-//            )
-//
-//
-//
-//            repositoryCheckPoints.savePhoto(
-//                CPhoto(
-//                    UUID.fromString("6d37dad0-6bb2-4548-80c1-e8e7be9f7a82"),
-//                    "dog.png",
-//                    UUID.fromString("6d37dad0-6bb3-4548-80c1-e8e7be9f7a82"),
-//                    null
-//                )
-//            )
-//
-//
-//        }
-//    }
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            //Запрос на обновление данных с сервера.
+            repositoryCheckPoints.updateCheckPointsFromServer()
+        }
+    }
 
 
     fun addCheckPoint(
