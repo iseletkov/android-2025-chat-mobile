@@ -40,6 +40,12 @@ android {
     buildFeatures {
         compose = true
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/LICENSE.md"
+            excludes += "/META-INF/NOTICE.md"
+        }
+    }
 }
 
 dependencies {
@@ -54,24 +60,27 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
 
-    //Datastore
+    //Datastore для локального хранения настроек.
     implementation(libs.androidx.datastore.preferences)
 
-    //Room
+    //Room для локального хранения данных в СУБД.
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
+    //Для обмена текстовыми данными JSON по сети
     // Retrofit
     implementation(libs.retrofit)
-    // Retrofit with Scalar Converter
-//    implementation(libs.converter.scalars)
-//    implementation(libs.jetbrains.kotlinx.serialization.json)
-//    implementation(libs.jakewharton.retrofit2.kotlinx.serialization.converter)
+    // Retrofit with Moshi Converter
     implementation(libs.converter.moshi)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
     implementation(libs.okhttp)
+
+    //Для скачивания изображений.
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

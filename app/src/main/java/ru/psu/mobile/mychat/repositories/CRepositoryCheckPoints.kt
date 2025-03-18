@@ -3,12 +3,9 @@ package ru.psu.mobile.mychat.repositories
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onEach
 import ru.psu.mobile.mychat.database.CDatabase
 import ru.psu.mobile.mychat.model.CCheckPoint
@@ -31,10 +28,6 @@ class CRepositoryCheckPoints(
     private val daoPhotos                   = db.daoPhotos()
 
     private val filesDir                    = File("${context.filesDir}/images")
-    init{
-        if (!filesDir.exists())
-            filesDir.mkdirs()
-    }
 
     fun getAll() : Flow<List<CCheckPoint>>
     {
@@ -125,6 +118,7 @@ class CRepositoryCheckPoints(
     {
         //Запрос данных на сервере
         val listcheckpoints = CAPICheckPoints.retrofitService.getCheckPoints()
+
         //Сохранение данных в локальную БД.
         insertAll(listcheckpoints)
     }

@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val BASE_URL =
-    "https://iseletkov.yardtech.ru:50880"
+    "http://192.168.1.4:50880"
 
 val moshi : Moshi = Moshi.Builder()
     .add(CAdapterUUID())

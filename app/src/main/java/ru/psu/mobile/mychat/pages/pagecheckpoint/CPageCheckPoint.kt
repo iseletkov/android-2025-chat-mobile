@@ -12,10 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
 import ru.psu.mobile.mychat.model.CCheckPointWithRelations
 import java.util.UUID
 
@@ -53,10 +52,14 @@ fun CPhotoGrid(
             items(checkPointWRState.value.photos.size) { index ->
                 Card(modifier = Modifier.height(300.dp)) {
                     checkPointWRState.value.photos[index].bitmap?.let{ bitmap ->
-                        Image(
-                            bitmap = bitmap.asImageBitmap(),
-                            contentDescription = "Photo",
-                            contentScale = ContentScale.FillBounds
+//                        Image(
+//                            bitmap = bitmap.asImageBitmap(),
+//                            contentDescription = "Photo",
+//                            contentScale = ContentScale.FillBounds
+//                        )
+                        AsyncImage(
+                            model = "http://192.168.1.4:50880/files/61478ed0-2c71-4f11-b90c-d0431cc7c82b",
+                            contentDescription = null,
                         )
 
                     }?:run{
